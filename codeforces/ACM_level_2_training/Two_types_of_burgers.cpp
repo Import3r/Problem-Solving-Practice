@@ -1,29 +1,33 @@
 #include <iostream>
 using namespace std;
 
-int count, beef_num, chicken_num, buns_num, bun_pairs;
-int& max_type[2], min_type[2];
+int beef_count, chicken_count, beef_price, chicken_price, buns_num, bun_pairs, n, profit;
 
 int main(){
 
-cin >> count;
+cin >> n;
 
-for (int i = 0; i < count; i++) {
-  std::cin >> buns_num;
-  std::cin >> beef[0];
-  std::cin >> chicken[0];
-  std::cin >> beef[1];
-  std::cin >> chicken[1];
-
-  bun_pairs = buns_num % 2;
+  for (int i = 0; i < n; i++) {
+    std::cin >> buns_num;
+    std::cin >> beef_count;
+    std::cin >> chicken_count;
+    std::cin >> beef_price;
+    std::cin >> chicken_price;
 
 
-  if (possible_sandwiches >= beef_num + buns_num){
-    std::cout << possible_sandwiches<< '\n';
+    bun_pairs = buns_num / 2;
+
+    if (beef_price > chicken_price) {
+      beef_count = min(bun_pairs, beef_count);
+      chicken_count = min(bun_pairs - beef_count, chicken_count);
+    }
+    else {
+      chicken_count = min(bun_pairs, chicken_count);
+      beef_count = min(bun_pairs - chicken_count, beef_count);
+    }
+
+    profit = beef_count*beef_price + chicken_count*chicken_price;
+    std::cout << profit << '\n';
   }
-  }
-}
-
-
   return 0;
 }
