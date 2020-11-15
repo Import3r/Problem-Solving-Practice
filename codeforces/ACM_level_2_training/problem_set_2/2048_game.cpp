@@ -1,38 +1,82 @@
 #include <iostream>
 using namespace std;
 #include <vector>
-#include<algorithm>
+#include <algorithm>
 
-vector < long long > number_list;
-long long number;
-int n, set_count;
-bool posssible = false;
+int q,n;
+std::vector<long long> v;
 
 int main(){
+  std::cin >> q;
+  while (q--) {
+    std::cin >> n;
+    std::vector<long long> v;
 
-  std::cin >> n;
-
-  while(n--){
-    std::cin >> set_count;
-    for (int i = 0; i < set_count; i++) {
-    std::cin >> number;
-    number_list.push_back(number);
+    while (n--) {
+      long long number;
+      std::cin >> number;
+      v.push_back(number);
     }
 
-    sort(number_list.begin(), number_list.end(),greater <long long>());
-
-    if(number_list.back() > 2048) {std::cout << "NO" << '\n'; continue;}
-    std::cout << number_list.back() << '\n';
-    for (int i = 0; i < number_list.size(); i++) {
-      if (number_list[i] > 2048) continue;
-      if (number_list[i] == 2048 || number_list[i] + number_list[i+1] == 2048) {
-        posssible = true;
+    bool found = false;
+    sort(v.begin(), v.end(), greater<long long>());
+    /*for (int i = 0; i < v.size(); i++) {
+      std::cout << v[i] << ' ';
+      }*/
+      //std::cout << '\n';
+    for (int i = 0; i < v.size(); i++) {
+      if (v[i] == 2048) {
+        std::cout << "YES" << '\n';
+        found = true;
         break;
       }
     }
-    if(posssible) std::cout << "YES" << '\n';
+    if(found) continue;
+
+    while (v.size() > 1) {
+      /*for (int i = 0; i < v.size(); i++) {
+        std::cout << v[i] << ' ';
+      }*/
+      //std::cout << '\n';
+      int i = v.size() - 1;
+      int j = i;
+      int tail_count = 0;
+      while (v[i] == v[j] && j >= 0) {
+        tail_count++;
+        j--;
+      }
+      j++;
+
+      //std::cout << tail_count << '\n';
+
+      if (tail_count == 1){
+        v.pop_back();
+        continue;
+      }
+
+      if(tail_count % 2 != 0){
+        v.pop_back();
+        i--;
+        tail_count--;
+      }
+
+      i -= tail_count / 2;
+
+      while (j <= i) {
+        v[i] *= 2;
+        v.pop_back();
+        i--;
+      }
+      if(v.back() == 2048) {
+        found = true;
+        break;
+      }
+    }
+    if(found){
+      std::cout << "YES" << '\n';
+      continue;
+    }
     else std::cout << "NO" << '\n';
-    posssible = false;
   }
   return 0;
 }
