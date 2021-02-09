@@ -1,0 +1,6 @@
+contest 1: bruteforce
+contest 2: greedy
+contest 3: two pointers and binary search
+contest 4: frequency array cumulative sum
+contest 5: STL datastructures (sets mainly)
+
