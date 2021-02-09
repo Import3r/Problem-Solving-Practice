@@ -2,18 +2,18 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <math.h>
 using namespace std;
 
+long long l, f, d;
+
 int main(){
-  vector<int> g;
-  int myinput[32] = {5, 7, 8};
-//input = 39847239847984273;
-//input = 4294967295;
-//input = ;
-g.push_back(9);
-cout << myinput[1] << g[0];
-sort(myinput);
-return 0;
+  for (int i = 32; i < 127; i++) {
+    long long possible_initial = pow(113, 1);
+    std::cout << possible_initial << '\n';
+    return 0;
+
+  }
 }
 
 
